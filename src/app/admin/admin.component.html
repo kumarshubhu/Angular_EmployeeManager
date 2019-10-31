@@ -1,0 +1,59 @@
+<h3>{{userName}}</h3>
+<button (click)="onClickLogOut()"
+    style="float:right;border-radius: 5px;background: rgb(241, 178, 95);color:royalblue;font-size: 20px;">Log
+    Out</button>
+<table style="border:2px solid gray" class="table table-hover">
+    <thead>
+        <th style="text-align:center" class="data">EmpId</th>
+        <th style="text-align:center" class="data">EmpName</th>
+        <th style="text-align:center" class="data">Designation</th>
+        <th style="text-align:center" class="data">Team</th>
+        <th style="text-align:center" class="data">Edit</th>
+    </thead>
+    <tr *ngFor="let m of employeeListToShow | paginate: { itemsPerPage: 5, currentPage: p }"
+        [class.selected]="m==employeeListToShow">
+        <td class="data">{{m.EmpId}}</td>
+        <td class="data">{{m.EmpName}}</td>
+        <td class="data">{{m.Designation}}</td>
+        <td class="data">{{m.Team}}</td>
+        <td><button class="btn btn-warning" data-toggle="modal" data-target="#myModal" (click)="onClickeditEmployee(m)">Edit</button>
+        </td>
+    </tr>
+</table>
+<pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Employee Details</h4>
+            </div>
+            <div class="modal-body">
+                <div *ngIf="employeeToBeEdited">
+                    <h3>Edit Entries</h3>
+                    <table class="table table table-hover"
+                        style="border:2px solid gray;background: rgb(144, 230, 141);border-radius: 5px 5px 5px 5px;">
+                        <thead>
+                            <th class="data">EmpId</th>
+                            <th class="data">EmpName</th>
+                            <th class="data">Designation</th>
+                            <th class="data">Team</th>
+                        </thead>
+                        <tr>
+                            <td class="data"><input [(ngModel)]="employeeToBeEdited.EmpId" readonly></td>
+                            <td class="data"><input [(ngModel)]='employeeToBeEdited.EmpName'></td>
+                            <td class="data"><input [(ngModel)]='employeeToBeEdited.Designation'></td>
+                            <td class="data"><input [(ngModel)]='employeeToBeEdited.Team'></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

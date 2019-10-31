@@ -1,0 +1,18 @@
+<body>
+  <div class="container">
+    <h2>Login</h2>
+    <form [formGroup]='LoginGroup' (ngSubmit)="verifyUser(i1.value,i2.value)">
+      <div class="form-group">
+        <label for="email">UserId:</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter UserId" name="email"  #i1 formControlName="UserId" required>
+      </div>
+      <div class="form-group">
+        <label for="pwd">Password:</label>
+        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" #i2 formControlName='Password' required>
+        <div *ngIf="LoginGroup.get('Password').invalid" >type valid password</div>
+      </div>
+      <button type="submit" class="btn btn-primary" class='i1' [disabled]="!LoginGroup.valid">Submit</button>
+    </form>
+  </div>
+</body>
+
